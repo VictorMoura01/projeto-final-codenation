@@ -6,6 +6,17 @@ export const Container = styled.div`
   border-radius: 4px;
   padding: 20px;
   display: ${(props) => (props.visible ? 'block' : 'none')};
+
+  button {
+    background: none;
+    border: 0;
+    padding: 6px;
+    transition: hover 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 `;
 
 export const CartHeader = styled.div`
@@ -37,17 +48,6 @@ export const CartItem = styled.li`
     height: 100px;
   }
 
-  button {
-    background: none;
-    border: 0;
-    padding: 6px;
-    transition: hover 0.2s ease-in-out;
-
-    &:hover {
-      opacity: 0.7;
-    }
-  }
-
   span {
     color: #666;
     font-weight: bold;
@@ -59,12 +59,12 @@ export const CartItem = styled.li`
     border: 1px solid #ddd;
     border-radius: 4px;
     color: #000;
-    padding: 4px;
-    width: 30px;
+    padding: 2px;
+    width: 40px;
     background: #fff;
   }
 
-  .item {
+  .item-container {
     flex: 1;
   }
 
@@ -87,4 +87,12 @@ export const CartItem = styled.li`
   }
 `;
 
-export const Total = styled.div``;
+export const Total = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  background: #000;
+  color: #fff;
+  height: 40px;
+`;

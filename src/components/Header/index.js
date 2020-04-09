@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { FiSearch, FiShoppingBag } from 'react-icons/fi';
 
 import Cart from '../Cart';
 
-import { Container, Content, Badge } from './styles';
+import { Container, Navbar, Badge } from './styles';
 
 export default function Header() {
-  const [visible, setVisible] = useState(true);
+  const cartItems = useSelector((state) => state.cart.length);
+  const [visible, setVisible] = useState(false);
 
   function handleToggleVisible() {
     setVisible(!visible);
   }
   return (
     <Container>
-      <Content>
-        <h1>Fashionista</h1>
-        <Badge cartItems={4} onClick={handleToggleVisible}>
-          <FiShoppingBag size={24} color="#000" />
-        </Badge>
-      </Content>
+      <Navbar>
+        <h1>FASHIONISTA</h1>
+        <div>
+          <Badge cartItems={cartItems} onClick={handleToggleVisible}>
+            <FiShoppingBag size={20} color="#000" />
+          </Badge>
+          <Badge>
+            <FiSearch size={20} color="#000" />
+          </Badge>
+        </div>
+      </Navbar>
       <Cart visible={visible} />
     </Container>
   );

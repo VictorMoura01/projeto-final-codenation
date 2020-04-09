@@ -1,77 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import api from '../../services/api';
+import { formataPreco } from '../../util/format';
+
+import Product from '../../components/Product';
+
+import produtosJson from '../../db.json';
 
 import { Container, ProductList } from './styles';
 
 export default function Home() {
+  const [products, setProducts] = useState(produtosJson);
+
+  useEffect(() => {
+    async function getProducts() {
+      const response = await api.get('produtos');
+      // const data = response.data.map((produto) => ({
+      //   ...produto,
+      //   precoFormatado: formataPreco(produto.preco),
+      // }));
+
+      const data = response.data.map(function (produto) {
+        if (produto.promocao) {
+          return {
+            ...produto,
+            precoFormatado: formataPreco(produto.preco),
+            precoPromocao: formataPreco(produto.preco * (1 - produto.promocao)),
+          };
+        }
+        return { ...produto, precoFormatado: formataPreco(produto.preco) };
+      });
+      setProducts(data);
+    }
+    // getProducts();
+  }, []);
+
   return (
-    <></>
-    // <Container>
-    //   <ProductList>
-    //     <li>
-    //       <img
-    //         src="https://static.netshoes.com.br/produtos/camiseta-joss-basica-cactus-feminina/14/DCL-1766-014/DCL-1766-014_zoom1.jpg"
-    //         alt="product_1"
-    //       />
-    //       <strong>Roupa 1</strong>
-    //       <span>R$ 129,90</span>
-    //     </li>
-    //     <li>
-    //       <img
-    //         src="https://static.netshoes.com.br/produtos/camiseta-joss-basica-caveira-flores-feminina/40/DCL-1782-040/DCL-1782-040_zoom1.jpg"
-    //         alt="product_2"
-    //       />
-    //       <strong>Roupa 1</strong>
-    //       <span>R$ 129,90</span>
-    //     </li>
-    //     <li>
-    //       <img
-    //         src="https://static.netshoes.com.br/produtos/camiseta-joss-basica-cactus-feminina/14/DCL-1766-014/DCL-1766-014_zoom1.jpg"
-    //         alt="product_1"
-    //       />
-    //       <strong>Roupa 1</strong>
-    //       <span>R$ 129,90</span>
-    //     </li>
-    //     <li>
-    //       <img
-    //         src="https://static.netshoes.com.br/produtos/camiseta-joss-basica-caveira-flores-feminina/40/DCL-1782-040/DCL-1782-040_zoom1.jpg"
-    //         alt="product_2"
-    //       />
-    //       <strong>Roupa 1</strong>
-    //       <span>R$ 129,90</span>
-    //     </li>{' '}
-    //     <li>
-    //       <img
-    //         src="https://static.netshoes.com.br/produtos/camiseta-joss-basica-cactus-feminina/14/DCL-1766-014/DCL-1766-014_zoom1.jpg"
-    //         alt="product_1"
-    //       />
-    //       <strong>Roupa 1</strong>
-    //       <span>R$ 129,90</span>
-    //     </li>
-    //     <li>
-    //       <img
-    //         src="https://static.netshoes.com.br/produtos/camiseta-joss-basica-caveira-flores-feminina/40/DCL-1782-040/DCL-1782-040_zoom1.jpg"
-    //         alt="product_2"
-    //       />
-    //       <strong>Roupa 1</strong>
-    //       <span>R$ 129,90</span>
-    //     </li>
-    //     <li>
-    //       <img
-    //         src="https://static.netshoes.com.br/produtos/camiseta-joss-basica-cactus-feminina/14/DCL-1766-014/DCL-1766-014_zoom1.jpg"
-    //         alt="product_1"
-    //       />
-    //       <strong>Roupa 1</strong>
-    //       <span>R$ 129,90</span>
-    //     </li>
-    //     <li>
-    //       <img
-    //         src="https://static.netshoes.com.br/produtos/camiseta-joss-basica-caveira-flores-feminina/40/DCL-1782-040/DCL-1782-040_zoom1.jpg"
-    //         alt="product_2"
-    //       />
-    //       <strong>Roupa 1</strong>
-    //       <span>R$ 129,90</span>
-    //     </li>
-    //   </ProductList>
-    // </Container>
+    <Container>
+      <ProductList>
+        {products.map((prod) => (
+          <Product product={prod} key={prod.id} />
+        ))}
+      </ProductList>
+    </Container>
   );
 }

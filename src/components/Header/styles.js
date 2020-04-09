@@ -3,14 +3,25 @@ import styled, { css } from 'styled-components';
 export const Container = styled.header`
   background: #fff;
   padding: 0 10px;
+  margin-top: 20px;
+  border-radius: 3px;
+  border: 1px solid #000;
 `;
 
-export const Content = styled.nav`
+export const Navbar = styled.nav`
   height: 64px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+
+  h1 {
+    flex: 1;
+    text-align: center;
+  }
+
+  button + button {
+    margin-left: 5px;
+  }
 `;
 
 export const Badge = styled.button`

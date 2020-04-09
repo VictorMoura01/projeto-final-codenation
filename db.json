@@ -1,0 +1,55 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "vestido transpasse bow",
+      "tamanho": ["p", "m", "g"],
+      "preco": 199.9,
+      "promocao": 0.2
+    },
+    {
+      "id": 2,
+      "nome": "regata alcinha folk",
+      "tamanho": ["p", "m", "g"],
+      "preco": 99.9
+    },
+    {
+      "id": 3,
+      "nome": "top cropped suede",
+      "tamanho": ["p", "m"],
+      "preco": 129.9
+    },
+    {
+      "id": 4,
+      "nome": "bata decote fluid",
+      "tamanho": ["p", "m", "g"],
+      "preco": 149.9
+    },
+    {
+      "id": 5,
+      "nome": "t-shirt leather dull",
+      "tamanho": ["p", "m", "g"],
+      "preco": 119.9
+    },
+    {
+      "id": 6,
+      "nome": "camisa suede spain",
+      "tamanho": ["p", "m", "g"],
+      "preco": 189.9,
+      "promocao": 0.15
+    },
+    {
+      "id": 7,
+      "nome": "calça classic print",
+      "tamanho": ["p", "m"],
+      "preco": 159.9
+    },
+    {
+      "id": 8,
+      "nome": "regata alcinha folk",
+      "tamanho": ["p", "m"],
+      "preco": 99.9,
+      "promocao": 0.25
+    }
+  ]
+}

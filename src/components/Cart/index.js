@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FiArrowLeft, FiPlus, FiMinus, FiTrash } from 'react-icons/fi';
 
@@ -14,6 +15,8 @@ import {
 import imagem from '../../img/imagem.jpg';
 
 export default function Cart({ visible }) {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <Container visible={visible}>
       <CartHeader>
@@ -24,164 +27,39 @@ export default function Cart({ visible }) {
 
       <CartList>
         <Scroll>
-          <CartItem>
-            <img src={imagem} alt="produto" />
-            <div className="item">
-              <div className="item-details">
-                <strong>Camisa cacto verde</strong>
-                <span>Tam.: M</span>
-              </div>
+          {cart.map((product) => (
+            <CartItem>
+              <img src={imagem} alt="produto" />
+              <div className="item-container">
+                <div className="item-details">
+                  <strong>{product.nome}</strong>
+                  <span>Tam.: {product.size}</span>
+                </div>
 
-              <div className="item-controls">
+                <div className="item-controls">
+                  <button type="button">
+                    <FiMinus size={20} />
+                  </button>
+                  <input type="number" readOnly value={product.amount} />
+                  <button type="button">
+                    <FiPlus size={20} />
+                  </button>
+                </div>
+              </div>
+              <div className="remove-button">
                 <button type="button">
-                  <FiMinus size={20} />
-                </button>
-                <input type="number" readOnly value={1} />
-                <button type="button">
-                  <FiPlus size={20} />
+                  <FiTrash size={20} />
                 </button>
               </div>
-            </div>
-            <div className="remove-button">
-              <button type="button">
-                <FiTrash size={20} />
-              </button>
-            </div>
-          </CartItem>
-
-          <CartItem>
-            <img src={imagem} alt="produto" />
-            <div className="item">
-              <div className="item-details">
-                <strong>Camisa cacto verde</strong>
-                <span>Tam.: M</span>
-              </div>
-
-              <div className="item-controls">
-                <button type="button">
-                  <FiMinus size={20} />
-                </button>
-                <input type="number" readOnly value={1} />
-                <button type="button">
-                  <FiPlus size={20} />
-                </button>
-              </div>
-            </div>
-            <div className="remove-button">
-              <button type="button">
-                <FiTrash size={20} />
-              </button>
-            </div>
-          </CartItem>
-
-          <CartItem>
-            <img src={imagem} alt="produto" />
-            <div className="item">
-              <div className="item-details">
-                <strong>Camisa cacto verde</strong>
-                <span>Tam.: M</span>
-              </div>
-
-              <div className="item-controls">
-                <button type="button">
-                  <FiMinus size={20} />
-                </button>
-                <input type="number" readOnly value={1} />
-                <button type="button">
-                  <FiPlus size={20} />
-                </button>
-              </div>
-            </div>
-            <div className="remove-button">
-              <button type="button">
-                <FiTrash size={20} />
-              </button>
-            </div>
-          </CartItem>
-
-          <CartItem>
-            <img src={imagem} alt="produto" />
-            <div className="item">
-              <div className="item-details">
-                <strong>Camisa cacto verde</strong>
-                <span>Tam.: M</span>
-              </div>
-
-              <div className="item-controls">
-                <button type="button">
-                  <FiMinus size={20} />
-                </button>
-                <input type="number" readOnly value={1} />
-                <button type="button">
-                  <FiPlus size={20} />
-                </button>
-              </div>
-            </div>
-            <div className="remove-button">
-              <button type="button">
-                <FiTrash size={20} />
-              </button>
-            </div>
-          </CartItem>
-
-          <CartItem>
-            <img src={imagem} alt="produto" />
-            <div className="item">
-              <div className="item-details">
-                <strong>Camisa cacto verde</strong>
-                <span>Tam.: M</span>
-              </div>
-
-              <div className="item-controls">
-                <button type="button">
-                  <FiMinus size={20} />
-                </button>
-                <input type="number" readOnly value={1} />
-                <button type="button">
-                  <FiPlus size={20} />
-                </button>
-              </div>
-            </div>
-            <div className="remove-button">
-              <button type="button">
-                <FiTrash size={20} />
-              </button>
-            </div>
-          </CartItem>
-
-          <CartItem>
-            <img src={imagem} alt="produto" />
-            <div className="item">
-              <div className="item-details">
-                <strong>Camisa cacto verde</strong>
-                <span>Tam.: M</span>
-              </div>
-
-              <div className="item-controls">
-                <button type="button">
-                  <FiMinus size={20} />
-                </button>
-                <input type="number" readOnly value={1} />
-                <button type="button">
-                  <FiPlus size={20} />
-                </button>
-              </div>
-            </div>
-            <div className="remove-button">
-              <button type="button">
-                <FiTrash size={20} />
-              </button>
-            </div>
-          </CartItem>
+            </CartItem>
+          ))}
         </Scroll>
       </CartList>
-      {/* <footer>
-        <button type="button">Finalizar</button>
+      <footer>
         <Total>
-          <span>Total</span>
-          <strong>R$ 1920,28</strong>
+          <strong>Subtotal - R$ 1920,28</strong>
         </Total>
-      </footer> */}
+      </footer>
     </Container>
   );
 }
