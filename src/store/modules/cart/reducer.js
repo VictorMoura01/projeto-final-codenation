@@ -25,6 +25,11 @@ export default function cart(state = INITIAL_STATE, action) {
           });
         }
       });
+
+    case '@cart/REMOVE_FROM_CART':
+      return produce(state, (draft) => {
+        draft.splice(action.payload.index, 1);
+      });
     default:
       return state;
   }

@@ -10,17 +10,28 @@ import produtosJson from '../../db.json';
 import { Container, ProductList } from './styles';
 
 export default function Home() {
-  const [products, setProducts] = useState(produtosJson);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function getProducts() {
-      const response = await api.get('produtos');
+      // const response = await api.get('produtos');
       // const data = response.data.map((produto) => ({
       //   ...produto,
       //   precoFormatado: formataPreco(produto.preco),
       // }));
 
-      const data = response.data.map(function (produto) {
+      // const data = response.data.map(function (produto) {
+      //   if (produto.promocao) {
+      //     return {
+      //       ...produto,
+      //       precoFormatado: formataPreco(produto.preco),
+      //       precoPromocao: formataPreco(produto.preco * (1 - produto.promocao)),
+      //     };
+      //   }
+      //   return { ...produto, precoFormatado: formataPreco(produto.preco) };
+      // });
+
+      const data = produtosJson.map(function (produto) {
         if (produto.promocao) {
           return {
             ...produto,
@@ -32,7 +43,7 @@ export default function Home() {
       });
       setProducts(data);
     }
-    // getProducts();
+    getProducts();
   }, []);
 
   return (

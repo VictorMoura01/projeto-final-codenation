@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FiArrowLeft, FiPlus, FiMinus, FiTrash } from 'react-icons/fi';
 
@@ -12,10 +12,17 @@ import {
   Total,
 } from './styles';
 
+import { removeFromCart } from '../../store/modules/cart/actions';
+
 import imagem from '../../img/imagem.jpg';
 
 export default function Cart({ visible }) {
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  function handleRemoveItem(index) {
+    dispatch(removeFromCart(index));
+  }
 
   return (
     <Container visible={visible}>
@@ -27,7 +34,7 @@ export default function Cart({ visible }) {
 
       <CartList>
         <Scroll>
-          {cart.map((product) => (
+          {cart.map((product, index) => (
             <CartItem>
               <img src={imagem} alt="produto" />
               <div className="item-container">
@@ -47,7 +54,7 @@ export default function Cart({ visible }) {
                 </div>
               </div>
               <div className="remove-button">
-                <button type="button">
+                <button type="button" onClick={() => handleRemoveItem(index)}>
                   <FiTrash size={20} />
                 </button>
               </div>
