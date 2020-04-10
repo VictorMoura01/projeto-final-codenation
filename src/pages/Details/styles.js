@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Item = styled.li`
+export const Container = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,13 +9,11 @@ export const Item = styled.li`
   border: 1px solid #000;
   padding: 20px;
   margin: 20px auto;
-  min-width: 260px;
-  max-width: 260px;
+  overflow: hidden;
 
   img {
     width: auto;
-    height: 200px;
-    overflow: hidden;
+    height: 350px;
   }
 
   strong {

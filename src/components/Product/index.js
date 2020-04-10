@@ -1,22 +1,14 @@
-import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { addToCart } from '../../store/modules/cart/actions';
 import imagem from '../../img/imagem.jpg';
 
-import { Item, SizeButton } from './styles';
+import { Item } from './styles';
 
 export default function Product({ product }) {
-  const dispatch = useDispatch();
-  const [selectedSizeIndex, setSelectedSizeIndex] = useState(-1);
-
-  function handleAddProduct() {
-    dispatch(addToCart(product, selectedSizeIndex));
-  }
-
   function renderSale() {
-    return <div className="product-sale">{product.promocao * 100} %</div>;
+    return <div className="product-sale">-{product.promocao * 100} %</div>;
   }
 
   function renderPrice() {
@@ -35,7 +27,7 @@ export default function Product({ product }) {
       {product.promocao && renderSale()}
       <img src={imagem} alt="produto_1" />
       <strong>{product.nome}</strong>
-      <div className="product-sizes">
+      {/* <div className="product-sizes">
         {product.tamanho.map((size, index) => (
           <SizeButton
             key={size}
@@ -46,15 +38,9 @@ export default function Product({ product }) {
             {size}
           </SizeButton>
         ))}
-      </div>
+      </div> */}
       {renderPrice()}
-      <button
-        type="button"
-        disabled={selectedSizeIndex < 0}
-        onClick={() => handleAddProduct()}
-      >
-        ADICIONAR
-      </button>
+      <Link to={`details/${product.id}`}>DETALHES</Link>
     </Item>
   );
 }

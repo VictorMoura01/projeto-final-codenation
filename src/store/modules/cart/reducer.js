@@ -1,5 +1,4 @@
 import produce from 'immer';
-import { string } from 'prop-types';
 
 const INITIAL_STATE = [];
 export default function cart(state = INITIAL_STATE, action) {
@@ -19,9 +18,7 @@ export default function cart(state = INITIAL_STATE, action) {
           draft.push({
             ...action.payload.product,
             amount: 1,
-            size: action.payload.product.tamanho[
-              action.payload.selectedSize
-            ].toUpperCase(),
+            size: action.payload.product.tamanho[action.payload.selectedSize],
           });
         }
       });
