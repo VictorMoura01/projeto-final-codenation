@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { FiSearch, FiShoppingBag } from 'react-icons/fi';
+import { FiSearch, FiShoppingBag, FiMoon } from 'react-icons/fi';
 
 import Cart from '../Cart';
 
@@ -18,11 +18,15 @@ export default function Header() {
       <Navbar>
         <h1>FASHIONISTA</h1>
         <div>
+          <Badge>
+            <FiSearch size={20} color="#000" />
+          </Badge>
           <Badge cartItems={cartItems} onClick={handleToggleVisible}>
             <FiShoppingBag size={20} color="#000" />
           </Badge>
+
           <Badge>
-            <FiSearch size={20} color="#000" />
+            <FiMoon size={20} color="#000" />
           </Badge>
         </div>
       </Navbar>

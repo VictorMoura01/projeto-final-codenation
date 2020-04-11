@@ -10,8 +10,12 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html{
+    height: 100%;
+  }
+
   body{
-    min-height: 100vh;
+    min-height: 100%;
   }
 
   body, input, button{
@@ -21,9 +25,14 @@ export default createGlobalStyle`
   }
 
   #root{
-    max-width: 1380px;
-    margin:0 auto;
-    padding: 0 20px 50px;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10vh auto 7vh;
+    grid-template-areas:
+    "header"
+    "main"
+    "footer";
   }
 
   button{

@@ -1,15 +1,13 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.header`
+  grid-area: header;
   background: #fff;
-  padding: 0 10px;
-  margin-top: 20px;
-  border-radius: 3px;
-  border: 1px solid #000;
+  padding: 20px;
 `;
 
 export const Navbar = styled.nav`
-  height: 64px;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Item = styled.li`
   position: relative;
@@ -6,11 +7,11 @@ export const Item = styled.li`
   flex-direction: column;
   align-items: center;
   border-radius: 2px;
-  border: 1px solid #000;
+  border: 1px solid #ddd;
   padding: 20px;
-  margin: 20px auto;
   min-width: 260px;
   max-width: 260px;
+  background: #fff;
 
   img {
     width: auto;
@@ -39,29 +40,6 @@ export const Item = styled.li`
     }
   }
 
-  > button {
-    height: 3em;
-    width: 8em;
-    border: none;
-    border: 1px solid #ddd;
-    color: #fff;
-    background-color: #141414;
-    transition: opacity 0.1s ease-in-out;
-    font-weight: bold;
-
-    &:hover {
-      opacity: 0.9;
-    }
-
-    &:disabled {
-      background-color: #eee;
-      color: #8a8986;
-      border: none;
-      pointer-events: none;
-      cursor: not-allowed;
-    }
-  }
-
   .product-sale {
     position: absolute;
     top: 0;
@@ -77,26 +55,22 @@ export const Item = styled.li`
   }
 `;
 
-export const SizeButton = styled.button`
-  width: 30px;
-  height: 30px;
-  background: transparent;
-  border-radius: 50%;
-  text-transform: uppercase;
-  transition: border 0.1s ease-in-out;
+export const LinkButton = styled(Link)`
+  height: 2em;
+  width: 6em;
+  border: none;
   border: 1px solid #ddd;
-
-  ${(props) =>
-    props.selected &&
-    css`
-      border: 1px solid #000;
-    `}
-
-  & + button {
-    margin-left: 5px;
-  }
+  border-radius: 2px;
+  color: #fff;
+  background-color: #141414;
+  transition: opacity 0.1s ease-in-out;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
-    border: 1px solid #000;
+    opacity: 0.9;
   }
 `;

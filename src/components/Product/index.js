@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import imagem from '../../img/imagem.jpg';
 
-import { Item } from './styles';
+import { Item, LinkButton } from './styles';
 
 export default function Product({ product }) {
   function renderSale() {
@@ -40,7 +40,7 @@ export default function Product({ product }) {
         ))}
       </div> */}
       {renderPrice()}
-      <Link to={`details/${product.id}`}>DETALHES</Link>
+      <LinkButton to={`details/${product.id}`}>DETALHES</LinkButton>
     </Item>
   );
 }
