@@ -1,19 +1,16 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
-  position: relative;
+export const Main = styled.main`
+  grid-area: main;
+  padding: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  border-radius: 2px;
-  border: 1px solid #000;
-  padding: 20px;
-  margin: 20px auto;
-  overflow: hidden;
 
   img {
-    width: auto;
-    height: 350px;
+    width: 280px;
+    height: 280px;
   }
 
   strong {
@@ -58,20 +55,6 @@ export const Container = styled.div`
       pointer-events: none;
       cursor: not-allowed;
     }
-  }
-
-  .product-sale {
-    position: absolute;
-    top: 0;
-    left: calc(100% - 32px);
-    height: 20px;
-    width: 32px;
-    background-color: #141414;
-    color: #fff;
-    font-size: 0.8em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 `;
 

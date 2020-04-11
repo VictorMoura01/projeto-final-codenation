@@ -5,7 +5,7 @@ import produtosJson from '../../db.json';
 import imagem from '../../img/imagem.jpg';
 import { formataPreco } from '../../util/format';
 
-import { Container, SizeButton } from './styles';
+import { Main, SizeButton } from './styles';
 
 export default function Details() {
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(-1);
@@ -26,7 +26,7 @@ export default function Details() {
   const spanPreco = useMemo(() => renderPrice(), [product]);
 
   return (
-    <Container>
+    <Main>
       <img src={imagem} alt="produto" />
       <strong>{product.nome}</strong>
       <div className="product-sizes">
@@ -43,6 +43,6 @@ export default function Details() {
       </div>
       {spanPreco}
       <button type="button">COMPRAR</button>
-    </Container>
+    </Main>
   );
 }
