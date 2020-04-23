@@ -5,7 +5,12 @@ import produtosJson from '../../db.json';
 import imagem from '../../img/imagem.jpg';
 import { formataPreco } from '../../util/format';
 
-import { Main, SizeButton } from './styles';
+import {
+  Main,
+  SizeButton,
+  ProductImagesWrapper,
+  ProductSummaryWrapper,
+} from './styles';
 
 export default function Details() {
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(-1);
@@ -27,22 +32,28 @@ export default function Details() {
 
   return (
     <Main>
-      <img src={imagem} alt="produto" />
-      <strong>{product.nome}</strong>
-      <div className="product-sizes">
-        {product.tamanho.map((size, index) => (
-          <SizeButton
-            key={size}
-            type="button"
-            selected={index === selectedSizeIndex}
-            onClick={() => {}}
-          >
-            {size}
-          </SizeButton>
-        ))}
-      </div>
-      {spanPreco}
-      <button type="button">COMPRAR</button>
+      <ProductImagesWrapper>
+        <img src={imagem} alt="produto" />
+      </ProductImagesWrapper>
+      <ProductSummaryWrapper>
+        <strong>{product.nome}</strong>
+        <div className="product-sizes">
+          {product.tamanho.map((size, index) => (
+            <SizeButton
+              key={size}
+              type="button"
+              selected={index === selectedSizeIndex}
+              onClick={() => {}}
+            >
+              {size}
+            </SizeButton>
+          ))}
+        </div>
+        {spanPreco}
+        <button className="main-button" type="button">
+          COMPRAR
+        </button>
+      </ProductSummaryWrapper>
     </Main>
   );
 }

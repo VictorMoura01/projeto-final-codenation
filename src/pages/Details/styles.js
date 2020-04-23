@@ -5,8 +5,15 @@ export const Main = styled.main`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  background-color: #fff;
+
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
 
   img {
     width: 280px;
@@ -17,7 +24,7 @@ export const Main = styled.main`
     font-size: 16px;
     line-height: 20px;
     color: #333;
-    margin-top: 5px;
+    margin: 15px 0;
     text-transform: uppercase;
   }
 
@@ -25,35 +32,12 @@ export const Main = styled.main`
     font-size: 16px;
     color: #333;
     font-weight: bold;
-    margin: 5px 0;
+    margin: 10px 0;
 
     strike {
       font-size: 14px;
       color: #333;
       font-weight: normal;
-    }
-  }
-
-  > button {
-    height: 3em;
-    width: 8em;
-    border: none;
-    border: 1px solid #ddd;
-    color: #fff;
-    background-color: #141414;
-    transition: opacity 0.1s ease-in-out;
-    font-weight: bold;
-
-    &:hover {
-      opacity: 0.9;
-    }
-
-    &:disabled {
-      background-color: #eee;
-      color: #8a8986;
-      border: none;
-      pointer-events: none;
-      cursor: not-allowed;
     }
   }
 `;
@@ -81,3 +65,7 @@ export const SizeButton = styled.button`
     border: 1px solid #000;
   }
 `;
+
+export const ProductImagesWrapper = styled.div``;
+
+export const ProductSummaryWrapper = styled.div``;
