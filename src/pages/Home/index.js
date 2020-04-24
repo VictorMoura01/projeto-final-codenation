@@ -1,56 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { store } from '../../store/modules/products/actions';
 import api from '../../services/api';
-import { formataPreco } from '../../util/format';
-
 import Product from '../../components/Product';
-
-import produtosJson from '../../db.json';
 
 import { Container, ProductList } from './styles';
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
 
   useEffect(() => {
     async function getProducts() {
-      // const response = await api.get('produtos');
-      // const data = response.data.map((produto) => ({
-      //   ...produto,
-      //   precoFormatado: formataPreco(produto.preco),
-      // }));
-
-      // const data = response.data.map(function (produto) {
-      //   if (produto.promocao) {
-      //     return {
-      //       ...produto,
-      //       precoFormatado: formataPreco(produto.preco),
-      //       precoPromocao: formataPreco(produto.preco * (1 - produto.promocao)),
-      //     };
-      //   }
-      //   return { ...produto, precoFormatado: formataPreco(produto.preco) };
-      // });
-
-      const data = produtosJson.map(function (produto) {
-        if (produto.promocao) {
-          return {
-            ...produto,
-            precoFormatado: formataPreco(produto.preco),
-            precoPromocao: formataPreco(produto.preco * (1 - produto.promocao)),
-          };
-        }
-        return { ...produto, precoFormatado: formataPreco(produto.preco) };
-      });
-      setProducts(data);
+      const response = await api.get('catalog');
+      dispatch(store(response.data));
     }
-    getProducts();
+    if (products.length === 0) getProducts();
   }, []);
 
   return (
     <Container>
       <ProductList>
         {products.map((prod) => (
-          <Product product={prod} key={prod.id} />
+          <Product product={prod} key={prod.code_color} />
         ))}
       </ProductList>
     </Container>

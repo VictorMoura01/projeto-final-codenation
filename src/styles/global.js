@@ -13,15 +13,17 @@ export default createGlobalStyle`
   html{
     height: 100%;
     width:100%;
+    font-size: 62.5%;
   }
 
   body{
     min-height: 100%;
     min-width: 100%;
+    font-size: 1.6rem;
   }
 
   body, input, button{
-    font-family: 'Karla', sans-serif;
+    font-family: 'Noto Sans SC',sans-serif;
     background-color: #fafafa;
     -webkit-font-smoothing: antialiased;
   }

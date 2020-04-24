@@ -1,9 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import produtosJson from '../../db.json';
-import imagem from '../../img/imagem.jpg';
-import { formataPreco } from '../../util/format';
 
 import {
   Main,
@@ -14,25 +10,12 @@ import {
 
 export default function Details() {
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(-1);
-  const { id } = useParams();
-  const product = produtosJson[id - 1];
-
-  function renderPrice() {
-    return product.promocao ? (
-      <span>
-        <strike>{formataPreco(product.preco)}</strike>{' '}
-        {formataPreco(product.preco * (1 - product.promocao))}
-      </span>
-    ) : (
-      <span>{formataPreco(product.preco)}</span>
-    );
-  }
-
-  const spanPreco = useMemo(() => renderPrice(), [product]);
+  const { product_name } = useParams();
 
   return (
     <Main>
-      <ProductImagesWrapper>
+      <h1>{product_name}</h1>
+      {/* <ProductImagesWrapper>
         <img src={imagem} alt="produto" />
       </ProductImagesWrapper>
       <ProductSummaryWrapper>
@@ -53,7 +36,7 @@ export default function Details() {
         <button className="main-button" type="button">
           COMPRAR
         </button>
-      </ProductSummaryWrapper>
+      </ProductSummaryWrapper> */}
     </Main>
   );
 }

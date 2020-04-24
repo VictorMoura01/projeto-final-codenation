@@ -10,14 +10,15 @@ export const ProductList = styled.ul`
   list-style: none;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  row-gap: 20px;
+  column-gap: 10px;
   justify-items: center;
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @media screen and (min-width: 1024px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
   }
 `;

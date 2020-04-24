@@ -1,57 +1,61 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import imagem from '../../img/imagem.jpg';
 
-import { Item, LinkButton } from './styles';
+import {
+  Wrapper,
+  ProductLink,
+  ProductFigure,
+  ProductName,
+  ProductPrice,
+  SalesTag,
+} from './styles';
 
 export default function Product({ product }) {
-  function renderSale() {
-    return <div className="product-sale">-{product.promocao * 100} %</div>;
+  function generateLink() {
+    return `details/${product.name.replace(/\s+/g, '-').toLowerCase()}`;
   }
 
   function renderPrice() {
-    if (product.promocao) {
+    if (product.on_sale) {
       return (
-        <span>
-          <strike>{product.precoFormatado}</strike> {product.precoPromocao}
-        </span>
+        <>
+          <span className="__product-price __product-price--from">
+            {product.regular_price}
+          </span>{' '}
+          <span className="__product-price">{product.actual_price}</span>
+        </>
       );
     }
-    return <span>{product.precoFormatado}</span>;
+    return <span className="__product-price">{product.actual_price}</span>;
   }
 
   return (
-    <Item key={product.id}>
-      {product.promocao && renderSale()}
-      <img src={imagem} alt="produto_1" />
-      <strong>{product.nome}</strong>
-      {/* <div className="product-sizes">
-        {product.tamanho.map((size, index) => (
-          <SizeButton
-            key={size}
-            type="button"
-            selected={index === selectedSizeIndex}
-            onClick={() => setSelectedSizeIndex(index)}
-          >
-            {size}
-          </SizeButton>
-        ))}
-      </div> */}
-      {renderPrice()}
-      <LinkButton to={`details/${product.id}`}>DETALHES</LinkButton>
-    </Item>
+    <Wrapper>
+      <ProductLink to={generateLink()}>
+        {product.on_sale && <SalesTag>{product.discount_percentage}</SalesTag>}
+        <ProductFigure>
+          <img
+            src="https://d3l7rqep7l31az.cloudfront.net/images/products/20002605_615_catalog_1.jpg"
+            alt={product.name}
+          />
+        </ProductFigure>
+        <ProductName>{product.name}</ProductName>
+        <ProductPrice>{renderPrice()}</ProductPrice>
+      </ProductLink>
+    </Wrapper>
   );
 }
 
 Product.propTypes = {
   product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    nome: PropTypes.string.isRequired,
-    precoFormatado: PropTypes.string.isRequired,
-    tamanho: PropTypes.array.isRequired,
-    promocao: PropTypes.number,
-    precoPromocao: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    style: PropTypes.string.isRequired,
+    code_color: PropTypes.string.isRequired,
+    on_sale: PropTypes.bool.isRequired,
+    regular_price: PropTypes.string.isRequired,
+    actual_price: PropTypes.string.isRequired,
+    discount_percentage: PropTypes.string,
   }).isRequired,
 };
