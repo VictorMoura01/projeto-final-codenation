@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.header`
+  position: fixed;
+  width: 100%;
   grid-area: header;
   background: #fff;
   padding: 20px;

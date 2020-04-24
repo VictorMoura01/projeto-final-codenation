@@ -17,6 +17,14 @@ export default function Product({ product }) {
     return `details/${product.name.replace(/\s+/g, '-').toLowerCase()}`;
   }
 
+  function generateImageUrl() {
+    if (!product.image)
+      return 'https://via.placeholder.com/470x594/FFF/?text=Imagem+Indispon%C3%ADvel';
+    const re = /https:\/\/aceleradev-react.netlify.app\/catalog\//;
+    const str = 'https://d3l7rqep7l31az.cloudfront.net/images/products/';
+    return product.image.replace(re, str);
+  }
+
   function renderPrice() {
     if (product.on_sale) {
       return (
@@ -36,10 +44,7 @@ export default function Product({ product }) {
       <ProductLink to={generateLink()}>
         {product.on_sale && <SalesTag>{product.discount_percentage}</SalesTag>}
         <ProductFigure>
-          <img
-            src="https://d3l7rqep7l31az.cloudfront.net/images/products/20002605_615_catalog_1.jpg"
-            alt={product.name}
-          />
+          <img src={generateImageUrl()} alt={product.name} />
         </ProductFigure>
         <ProductName>{product.name}</ProductName>
         <ProductPrice>{renderPrice()}</ProductPrice>
@@ -57,5 +62,6 @@ Product.propTypes = {
     regular_price: PropTypes.string.isRequired,
     actual_price: PropTypes.string.isRequired,
     discount_percentage: PropTypes.string,
+    image: PropTypes.string.isRequired,
   }).isRequired,
 };
