@@ -5,7 +5,7 @@ export const Container = styled.header`
   width: 100%;
   grid-area: header;
   background: #fff;
-  padding: 20px;
+  padding: 5px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   z-index: 2;
 `;

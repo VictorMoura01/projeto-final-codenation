@@ -1,0 +1,44 @@
+.product {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product__link {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #212529;
+}
+
+.product__figure img {
+  width: 100%;
+  overflow: hidden;
+}
+
+.product__name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  color: #333;
+}
+
+.product__prices {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product__price {
+  font-size: 1.4rem;
+}
+
+.product__price--regular {
+  font-size: 1.2rem;
+  color: #a7a7a7;
+  text-decoration: line-through;
+}

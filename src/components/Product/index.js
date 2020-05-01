@@ -1,55 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import imagem from '../../img/imagem.jpg';
+import './style.css';
 
-import {
-  Wrapper,
-  ProductLink,
-  ProductFigure,
-  ProductName,
-  ProductPrice,
-  SalesTag,
-} from './styles';
+import { SalesTag } from '../../styles/SalesTag';
 
 export default function Product({ product }) {
+  const productImageReplace =
+    'https://via.placeholder.com/470x594/FFF/?text=Imagem+Indispon%C3%ADvel';
+
   function generateLink() {
     return `details/${product.name.replace(/\s+/g, '-').toLowerCase()}`;
   }
 
-  function generateImageUrl() {
-    if (!product.image)
-      return 'https://via.placeholder.com/470x594/FFF/?text=Imagem+Indispon%C3%ADvel';
-    const re = /https:\/\/aceleradev-react.netlify.app\/catalog\//;
-    const str = 'https://d3l7rqep7l31az.cloudfront.net/images/products/';
-    return product.image.replace(re, str);
-  }
-
-  function renderPrice() {
-    if (product.on_sale) {
-      return (
-        <>
-          <span className="__product-price __product-price--from">
-            {product.regular_price}
-          </span>{' '}
-          <span className="__product-price">{product.actual_price}</span>
-        </>
-      );
-    }
-    return <span className="__product-price">{product.actual_price}</span>;
-  }
-
   return (
-    <Wrapper>
-      <ProductLink to={generateLink()}>
+    <li>
+      <Link className="product__link" to={generateLink()}>
         {product.on_sale && <SalesTag>{product.discount_percentage}</SalesTag>}
-        <ProductFigure>
-          <img src={generateImageUrl()} alt={product.name} />
-        </ProductFigure>
-        <ProductName>{product.name}</ProductName>
-        <ProductPrice>{renderPrice()}</ProductPrice>
-      </ProductLink>
-    </Wrapper>
+        <figure className="product__figure">
+          <img src={product.image || productImageReplace} alt={product.name} />
+        </figure>
+        <h3 className="product__name">{product.name}</h3>
+        <div className="product__prices">
+          {product.on_sale && (
+            <span className="product__price product__price--regular">
+              {product.regular_price}
+            </span>
+          )}
+          <span className="product__price">{product.actual_price}</span>
+        </div>
+      </Link>
+    </li>
   );
 }
 

@@ -7,7 +7,6 @@ import './config/ReactotronConfig';
 
 import Routes from './routes';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import GlobalStyle from './styles/global';
 
 import { store, persistor } from './store';
@@ -20,7 +19,6 @@ function App() {
           <GlobalStyle />
           <Header />
           <Routes />
-          <Footer />
         </BrowserRouter>
       </PersistGate>
     </Provider>

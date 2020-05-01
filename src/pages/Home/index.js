@@ -5,7 +5,7 @@ import { store } from '../../store/modules/products/actions';
 import api from '../../services/api';
 import Product from '../../components/Product';
 
-import { Container, ProductList } from './styles';
+import './style.css';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -20,12 +20,12 @@ export default function Home() {
   }, []);
 
   return (
-    <Container>
-      <ProductList>
+    <main className="products__container">
+      <ul className="products__list">
         {products.map((prod) => (
           <Product product={prod} key={prod.code_color} />
         ))}
-      </ProductList>
-    </Container>
+      </ul>
+    </main>
   );
 }

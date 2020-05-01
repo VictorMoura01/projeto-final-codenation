@@ -14,8 +14,6 @@ import {
 
 import { removeFromCart } from '../../store/modules/cart/actions';
 
-import imagem from '../../img/imagem.jpg';
-
 export default function Cart({ visible }) {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -36,7 +34,7 @@ export default function Cart({ visible }) {
         <Scroll>
           {cart.map((product, index) => (
             <CartItem>
-              <img src={imagem} alt="produto" />
+              <img src={product.image} alt="produto" />
               <div className="item-container">
                 <div className="item-details">
                   <strong>{product.nome}</strong>
