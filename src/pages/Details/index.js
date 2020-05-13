@@ -2,7 +2,17 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import './style.css';
+import {
+  Container,
+  ImageContainer,
+  ProductSummary,
+  ProductPrice,
+  ProductSizes,
+  SizeText,
+  WarningText,
+  SizeButton,
+  AddButton,
+} from './styles';
 
 import { SalesTag } from '../../styles/SalesTag';
 
@@ -21,50 +31,45 @@ export default function Details() {
     return (
       <div>
         {product.on_sale && (
-          <span className="product__price product__price--regular">
-            {product.regular_price}
-          </span>
+          <ProductPrice regular>{product.regular_price}</ProductPrice>
         )}
-        <span className="product__price">{product.actual_price}</span>
-        <span className="product__price product__price--installment">
-          em até {product.installments}
-        </span>
+        <ProductPrice>{product.actual_price}</ProductPrice>
+        <ProductPrice installment>em até {product.installments}</ProductPrice>
       </div>
     );
   }
 
   return (
-    <main className="product">
-      <figure className="image__container">
+    <Container>
+      <ImageContainer>
         {product.on_sale && <SalesTag>-{product.discount_percentage}</SalesTag>}
         <img src={product.image || productImageReplace} alt="produto" />
-      </figure>
-      <div className="product__description">
-        <h3 className="product__name">{product.name}</h3>
+      </ImageContainer>
+      <ProductSummary>
+        <h3>{product.name}</h3>
         {renderPrice()}
-        <div className="product__sizes">
-          <p className="size__text">Escolha um tamanho</p>
+        <ProductSizes>
+          <SizeText>Escolha um tamanho</SizeText>
+          <WarningText>É necessário escolher um tamanho</WarningText>
           <div>
             {product.sizes.map(
               (item, index) =>
                 item.available && (
-                  <button
-                    className="product__size-button"
+                  <SizeButton
+                    selected={selectedSizeIndex === index}
                     key={item.size}
-                    type="button"
-                    selected={index === selectedSizeIndex}
-                    onClick={() => {}}
+                    onClick={() => {
+                      setSelectedSizeIndex(index);
+                    }}
                   >
                     {item.size}
-                  </button>
+                  </SizeButton>
                 )
             )}
           </div>
-        </div>
-        <button className="product__add-button" type="button">
-          Adicionar à Sacola
-        </button>
-      </div>
-    </main>
+        </ProductSizes>
+        <AddButton>Adicionar à Sacola</AddButton>
+      </ProductSummary>
+    </Container>
   );
 }

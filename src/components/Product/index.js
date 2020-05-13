@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
-import './style.css';
+import {
+  Container,
+  ProductLink,
+  ProductFigure,
+  ProductName,
+  ProductPrices,
+  ProductPrice,
+} from './styles';
 
 import { SalesTag } from '../../styles/SalesTag';
 
@@ -10,28 +16,22 @@ export default function Product({ product }) {
   const productImageReplace =
     'https://via.placeholder.com/470x594/FFF/?text=Imagem+Indispon%C3%ADvel';
 
-  function generateLink() {
-    return `details/${product.name.replace(/\s+/g, '-').toLowerCase()}`;
-  }
-
   return (
-    <li>
-      <Link className="product__link" to={generateLink()}>
+    <Container>
+      <ProductLink to={product.productUrl}>
         {product.on_sale && <SalesTag>{product.discount_percentage}</SalesTag>}
-        <figure className="product__figure">
+        <ProductFigure>
           <img src={product.image || productImageReplace} alt={product.name} />
-        </figure>
-        <h3 className="product__name">{product.name}</h3>
-        <div className="product__prices">
+        </ProductFigure>
+        <ProductName>{product.name}</ProductName>
+        <ProductPrices>
           {product.on_sale && (
-            <span className="product__price product__price--regular">
-              {product.regular_price}
-            </span>
+            <ProductPrice regular>{product.regular_price}</ProductPrice>
           )}
-          <span className="product__price">{product.actual_price}</span>
-        </div>
-      </Link>
-    </li>
+          <ProductPrice>{product.actual_price}</ProductPrice>
+        </ProductPrices>
+      </ProductLink>
+    </Container>
   );
 }
 
@@ -45,5 +45,6 @@ Product.propTypes = {
     actual_price: PropTypes.string.isRequired,
     discount_percentage: PropTypes.string,
     image: PropTypes.string.isRequired,
+    productUrl: PropTypes.string.isRequired,
   }).isRequired,
 };

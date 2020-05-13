@@ -5,7 +5,7 @@ import { store } from '../../store/modules/products/actions';
 import api from '../../services/api';
 import Product from '../../components/Product';
 
-import './style.css';
+import { Container, ProductList } from './styles';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -14,18 +14,24 @@ export default function Home() {
   useEffect(() => {
     async function getProducts() {
       const response = await api.get('catalog');
-      dispatch(store(response.data));
+      const data = response.data.map((product) => ({
+        ...product,
+        productUrl: `details/${product.name
+          .replace(/\s+/g, '-')
+          .toLowerCase()}`,
+      }));
+      dispatch(store(data));
     }
     if (products.length === 0) getProducts();
   }, []);
 
   return (
-    <main className="products__container">
-      <ul className="products__list">
+    <Container>
+      <ProductList>
         {products.map((prod) => (
           <Product product={prod} key={prod.code_color} />
         ))}
-      </ul>
-    </main>
+      </ProductList>
+    </Container>
   );
 }

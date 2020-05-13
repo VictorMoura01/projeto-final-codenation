@@ -4,6 +4,7 @@ export const Container = styled.main`
   grid-area: main;
   padding: 20px;
   margin: 0 auto;
+  max-width: 1250px;
 `;
 
 export const ProductList = styled.ul`
