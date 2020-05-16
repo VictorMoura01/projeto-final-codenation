@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
+import { addToCart } from '../../store/modules/cart/actions';
 
 import {
   Container,
@@ -17,13 +19,15 @@ import {
 import { SalesTag } from '../../styles/SalesTag';
 
 export default function Details() {
+  const dispatch = useDispatch();
   const productImageReplace =
     'https://via.placeholder.com/470x594/FFF/?text=Imagem+Indispon%C3%ADvel';
-  const [selectedSizeIndex, setSelectedSizeIndex] = useState(-1);
-  const { product_name } = useParams();
+  const [sizeIndex, setSizeIndex] = useState(-1);
+  const [showWarning, setShowWarning] = useState(false);
+  const { productName } = useParams();
   const product = useSelector((state) =>
     state.products.find(
-      (p) => p.name === product_name.replace(/-/g, ' ').toUpperCase()
+      (p) => p.name === productName.replace(/-/g, ' ').toUpperCase()
     )
   );
 
@@ -39,6 +43,18 @@ export default function Details() {
     );
   }
 
+  function handleAddToCart() {
+    if (sizeIndex === -1) {
+      setShowWarning(true);
+    }
+    setShowWarning(false);
+    const { name, actual_price, installments, image } = product;
+    const selectedSize = product.sizes[sizeIndex];
+    dispatch(
+      addToCart({ name, actual_price, installments, image, size: selectedSize })
+    );
+  }
+
   return (
     <Container>
       <ImageContainer>
@@ -50,16 +66,18 @@ export default function Details() {
         {renderPrice()}
         <ProductSizes>
           <SizeText>Escolha um tamanho</SizeText>
-          <WarningText>É necessário escolher um tamanho</WarningText>
+          <WarningText visible={showWarning}>
+            É necessário escolher um tamanho
+          </WarningText>
           <div>
             {product.sizes.map(
               (item, index) =>
                 item.available && (
                   <SizeButton
-                    selected={selectedSizeIndex === index}
+                    selected={sizeIndex === index}
                     key={item.size}
                     onClick={() => {
-                      setSelectedSizeIndex(index);
+                      setSizeIndex(index);
                     }}
                   >
                     {item.size}
@@ -68,7 +86,7 @@ export default function Details() {
             )}
           </div>
         </ProductSizes>
-        <AddButton>Adicionar à Sacola</AddButton>
+        <AddButton onClick={handleAddToCart}>Adicionar à Sacola</AddButton>
       </ProductSummary>
     </Container>
   );

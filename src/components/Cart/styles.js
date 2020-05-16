@@ -1,36 +1,55 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PerfectScrollBar from 'react-perfect-scrollbar';
 
 export const Container = styled.div`
-  background: #fff;
-  border-radius: 4px;
-  padding: 20px;
-  display: ${(props) => (props.visible ? 'block' : 'none')};
+  display: flex;
+  flex-direction: column;
+  backface-visibility: hidden;
+  background: #f9f9f9;
+  top: 0;
+  min-height: 100vh;
+  position: fixed;
+  transition: transform 0.3s ease-out;
+  transform: translate3d(100%, 0, 0);
+  width: 100%;
+  z-index: 20;
 
-  button {
-    background: none;
-    border: 0;
-    padding: 6px;
-    transition: hover 0.2s ease-in-out;
+  ${({ visible }) =>
+    visible &&
+    css`
+      transform: translateZ(0);
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
+        0 15px 12px rgba(0, 0, 0, 0.22);
+      }
+    `}
 
-    &:hover {
-      opacity: 0.7;
-    }
+  &::before {
+    background-color: red;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 375px;
+    right: 0;
   }
 `;
 
 export const CartHeader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: start;
   font-weight: bold;
+  padding: 15px;
+  background: #fff;
+  margin-bottom: 5px;
+
+  span {
+    margin: 0 auto;
+  }
 `;
 
-export const CartList = styled.ul`
-  list-style: none;
-`;
+export const CartList = styled.ul``;
 
 export const Scroll = styled(PerfectScrollBar)`
+  padding: 10px;
   max-height: 350px;
 `;
 
@@ -38,21 +57,14 @@ export const CartItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 5px;
-  padding-bottom: 5px;
-  padding-right: 15px;
 
-  border-bottom: 1px solid #eee;
+  & + & {
+    margin-top: 5px;
+    border-bottom: 1px solid #eee;
+  }
 
   img {
     height: 100px;
-  }
-
-  span {
-    color: #666;
-    font-weight: bold;
-    margin-top: 5px;
-    font-size: 14px;
   }
 
   input {
@@ -64,26 +76,31 @@ export const CartItem = styled.li`
     background: #fff;
   }
 
-  .item-container {
-    flex: 1;
+  .cart_item__name {
+    font-size: 1.4rem;
+    font-weight: 600;
   }
 
-  .item-details {
+  .cart-item__size {
+    color: #666;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .cart-item__summary {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-
-    strong {
-      color: #333;
-      display: block;
-      text-transform: uppercase;
-    }
   }
 
-  .item-controls {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  .cart-item__price {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  .cart-item__action {
+    margin-top: 5px;
   }
 `;
 

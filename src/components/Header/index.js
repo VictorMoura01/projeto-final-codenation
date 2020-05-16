@@ -1,40 +1,29 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FiSearch, FiShoppingBag } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
 
 import Cart from '../Cart';
 
-import './style.css';
+import { Container, Navbar, NavLogo, Badge } from './styles';
 
 export default function Header() {
   const cartItems = useSelector((state) => state.cart.length);
   const [visible, setVisible] = useState(false);
 
-  function handleToggleVisible() {
-    setVisible(!visible);
-  }
   return (
-    <header className="nav__container">
-      <nav className="nav__bar">
-        <Link className="nav__logo" to="/">
-          FASHIONISTA
-        </Link>
+    <Container>
+      <Navbar>
+        <NavLogo to="/">FASHIONISTA</NavLogo>
         <div>
-          <button className="nav__action-button" type="button">
+          <Badge>
             <FiSearch size={20} color="#000" />
-          </button>
-          <button
-            className="nav__action-button"
-            type="button"
-            cartItems={cartItems}
-            onClick={handleToggleVisible}
-          >
+          </Badge>
+          <Badge cartItems={cartItems} onClick={() => setVisible(!visible)}>
             <FiShoppingBag size={20} color="#000" />
-          </button>
+          </Badge>
         </div>
-      </nav>
-      <Cart visible={visible} />
-    </header>
+      </Navbar>
+      <Cart visible handleBackClick={() => setVisible(!visible)} />
+    </Container>
   );
 }

@@ -14,6 +14,7 @@ export const ProductList = styled.ul`
   row-gap: 20px;
   column-gap: 10px;
   justify-items: center;
+  padding: 0;
 
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);

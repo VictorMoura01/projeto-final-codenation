@@ -18,9 +18,8 @@ export const Container = styled.main`
 `;
 
 export const ImageContainer = styled.figure`
-  position: relative;
-  width: 100%;
   height: 100%;
+  position: relative;
 
   img {
     width: 100%;
@@ -83,7 +82,7 @@ export const WarningText = styled.p`
   color: red;
   font-weight: 600;
   margin-bottom: 5px;
-  display: none;
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
 `;
 
 export const SizeButton = styled.button`

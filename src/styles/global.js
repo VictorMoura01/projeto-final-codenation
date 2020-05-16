@@ -3,12 +3,12 @@ import { normalize } from 'styled-normalize';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
 export default createGlobalStyle`
+
   ${normalize}
 
   *{
-    margin: 0;
-    padding: 0;
-    outline: 0;
+    margin:0;
+    padding:0;
     box-sizing: border-box;
   }
 
@@ -19,8 +19,6 @@ export default createGlobalStyle`
   }
 
   body{
-    min-height: 100%;
-    min-width: 100%;
     font-size: 1.6rem;
     font-weight: 400;
     font-family: 'Noto Sans SC',sans-serif;
@@ -28,29 +26,20 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
-  .container{
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  @media screen and (min-width: 1024px) {
-    .container {
-      width:1024px;
-      }
-   }
-
   #root{
-    height: 100vh;
+    min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 10vh auto;
+    grid-template-rows: 5vh auto;
     grid-template-areas:
-    "header"
-    "main"
+      'header'
+      'main';
   }
 
   button{
     cursor:pointer;
+    border: none;
+    background-color: transparent;
   }
 
 `;
