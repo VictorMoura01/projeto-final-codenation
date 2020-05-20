@@ -19,6 +19,9 @@ export default function Home() {
         productUrl: `details/${product.name
           .replace(/\s+/g, '-')
           .toLowerCase()}`,
+        numericPrice: Number(
+          product.actual_price.replace(/R\$\s/, '').replace(/,/, '.')
+        ),
       }));
       dispatch(store(data));
     }

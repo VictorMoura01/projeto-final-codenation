@@ -48,10 +48,17 @@ export default function Details() {
       setShowWarning(true);
     }
     setShowWarning(false);
-    const { name, actual_price, installments, image } = product;
+    const { name, actual_price, installments, image, numericPrice } = product;
     const selectedSize = product.sizes[sizeIndex];
     dispatch(
-      addToCart({ name, actual_price, installments, image, size: selectedSize })
+      addToCart({
+        name,
+        actual_price,
+        numericPrice,
+        installments,
+        image,
+        size: selectedSize,
+      })
     );
   }
 

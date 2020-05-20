@@ -23,7 +23,7 @@ export default function Header() {
           </Badge>
         </div>
       </Navbar>
-      <Cart visible handleBackClick={() => setVisible(!visible)} />
+      <Cart visible={visible} handleBackClick={() => setVisible(!visible)} />
     </Container>
   );
 }

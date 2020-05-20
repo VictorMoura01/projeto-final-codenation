@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import PerfectScrollBar from 'react-perfect-scrollbar';
+// import PerfectScrollBar from 'react-perfect-scrollbar';
 
 export const Container = styled.div`
   display: flex;
@@ -46,25 +46,19 @@ export const CartHeader = styled.div`
   }
 `;
 
-export const CartList = styled.ul``;
-
-export const Scroll = styled(PerfectScrollBar)`
-  padding: 10px;
-  max-height: 350px;
+export const CartList = styled.ul`
+  padding: 0 16px;
 `;
 
 export const CartItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 150px;
 
   & + & {
     margin-top: 5px;
     border-bottom: 1px solid #eee;
-  }
-
-  img {
-    height: 100px;
   }
 
   input {
@@ -101,6 +95,50 @@ export const CartItem = styled.li`
 
   .cart-item__action {
     margin-top: 5px;
+  }
+`;
+
+export const ProductFigure = styled.figure`
+  height: 100%;
+  img {
+    height: 100%;
+  }
+`;
+
+export const SummaryWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  flex-direction: column;
+  height: 100%;
+  padding: 5px;
+`;
+
+export const ProductName = styled.span`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+`;
+
+export const ProductSize = styled.span`
+  color: #666;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+`;
+
+export const ProductPrice = styled.span`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+`;
+
+export const ProductActions = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  span {
+    margin: 0 5px;
   }
 `;
 

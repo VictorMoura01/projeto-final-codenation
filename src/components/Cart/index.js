@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FiArrowLeft, FiPlus, FiMinus, FiTrash } from 'react-icons/fi';
@@ -7,8 +7,13 @@ import {
   Container,
   CartHeader,
   CartList,
-  Scroll,
   CartItem,
+  ProductFigure,
+  SummaryWrapper,
+  ProductName,
+  ProductSize,
+  ProductPrice,
+  ProductActions,
   Total,
 } from './styles';
 
@@ -16,11 +21,19 @@ import { removeFromCart } from '../../store/modules/cart/actions';
 
 export default function Cart({ visible, handleBackClick }) {
   const cart = useSelector((state) => state.cart);
+  const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
 
   function handleRemoveItem(index) {
     dispatch(removeFromCart(index));
   }
+
+  useEffect(() => {
+    const totalPrice = cart.reduce((accumulator, product) => {
+      return accumulator + product.numericPrice;
+    }, 0);
+    setTotal(totalPrice);
+  }, [cart]);
 
   return (
     <Container visible={visible}>
@@ -31,44 +44,34 @@ export default function Cart({ visible, handleBackClick }) {
         <span>Sacola ({cart.length})</span>
       </CartHeader>
       <CartList>
-        {/* <Scroll> */}
         {cart.map((product, index) => (
-          <CartItem>
-            <figure>
+          <CartItem key={product.code_color}>
+            <ProductFigure>
               <img src={product.image} alt="produto" />
-            </figure>
-            <div>
-              <div className="cart-item__summary">
-                <span className="cart_item__name">{product.name}</span>
-                <span className="cart-item__size">
-                  Tam.: {product.size.size}
-                </span>
-                <span className="cart-item__price">
-                  {product.actual_price} em até {product.installments}
-                </span>
-              </div>
-              <div className="cart-item__action">
+            </ProductFigure>
+            <SummaryWrapper>
+              <ProductName>{product.name}</ProductName>
+              <ProductSize>Tam.: {product.size.size}</ProductSize>
+              <ProductPrice>{product.actual_price}</ProductPrice>
+              <ProductActions>
                 <button type="button">
                   <FiMinus size={20} />
                 </button>
-                <input type="number" readOnly value={product.amount} />
+                <span>{product.amount}</span>
                 <button type="button">
                   <FiPlus size={20} />
                 </button>
-              </div>
-            </div>
-            <div>
-              <button type="button" onClick={() => handleRemoveItem(index)}>
-                <FiTrash size={20} />
-              </button>
-            </div>
+                <button type="button" onClick={() => handleRemoveItem(index)}>
+                  <FiTrash size={20} />
+                </button>
+              </ProductActions>
+            </SummaryWrapper>
           </CartItem>
         ))}
-        {/* </Scroll> */}
       </CartList>
       <footer>
         <Total>
-          <strong>Subtotal - R$ 1920,28</strong>
+          <strong>Total - R$ {total}</strong>
         </Total>
       </footer>
     </Container>
