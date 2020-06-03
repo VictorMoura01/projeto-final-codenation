@@ -27,7 +27,9 @@ export default function Details() {
   const { productName } = useParams();
   const product = useSelector((state) =>
     state.products.find(
-      (p) => p.name === productName.replace(/-/g, ' ').toUpperCase()
+      (p) =>
+        p.name.replace(/\s|-/g, '') ===
+        productName.replace(/-/g, '').toUpperCase()
     )
   );
 

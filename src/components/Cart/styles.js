@@ -68,14 +68,21 @@ export const ProductFigure = styled.figure`
 
 export const ProductWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 75%;
+  padding: 0 0.5rem;
 `;
 
 export const ProductInfo = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 0 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const ProductName = styled.span`
@@ -93,7 +100,6 @@ export const ProductSize = styled.span`
 export const ProductPrice = styled.span`
   font-size: 1.4rem;
   font-weight: 600;
-  width: 50%;
   text-align: right;
 `;
 
@@ -101,15 +107,22 @@ export const ProductActions = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   span {
     padding: 0 1.6rem;
   }
 
-  button {
-    border: 1px solid #000;
-    border-radius: 2px;
+  div {
+    display: flex;
   }
+`;
+
+export const ActionButton = styled.button`
+  border: ${({ remove }) => (remove ? 'none' : '1px solid #000')};
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
 `;
 
 export const Total = styled.footer`

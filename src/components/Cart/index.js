@@ -16,6 +16,7 @@ import {
   ProductSize,
   ProductPrice,
   ProductActions,
+  ActionButton,
   Total,
 } from './styles';
 
@@ -53,22 +54,26 @@ export default function Cart({ visible, handleBackClick }) {
             </ProductFigure>
             <ProductWrapper>
               <ProductInfo>
-                <ProductName>{product.name}</ProductName>
-                <ProductSize>Tam.: {product.size.size}</ProductSize>
-                <ProductActions>
-                  <button type="button">
-                    <FiMinus size={20} />
-                  </button>
-                  <span>{product.amount}</span>
-                  <button type="button">
-                    <FiPlus size={20} />
-                  </button>
-                  {/* <button type="button" onClick={() => handleRemoveItem(index)}>
-                    <FiTrash size={20} />
-                  </button> */}
-                </ProductActions>
+                <div>
+                  <ProductName>{product.name}</ProductName>
+                  <ProductSize>Tam.: {product.size.size}</ProductSize>
+                </div>
+                <ProductPrice>{product.actual_price}</ProductPrice>
               </ProductInfo>
-              <ProductPrice>{product.actual_price}</ProductPrice>
+              <ProductActions>
+                <div>
+                  <ActionButton>
+                    <FiMinus size={20} />
+                  </ActionButton>
+                  <span>{product.amount}</span>
+                  <ActionButton>
+                    <FiPlus size={20} />
+                  </ActionButton>
+                </div>
+                <ActionButton remove onClick={() => handleRemoveItem(index)}>
+                  <FiTrash size={20} />
+                </ActionButton>
+              </ProductActions>
             </ProductWrapper>
           </CartItem>
         ))}
