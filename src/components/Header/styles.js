@@ -19,15 +19,6 @@ export const Navbar = styled.nav`
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-
-  /* h1 {
-    flex: 1;
-    text-align: center;
-  }
-
-  button + button {
-    margin-left: 5px;
-  } */
 `;
 
 export const NavLogo = styled(Link)`

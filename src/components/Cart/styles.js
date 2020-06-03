@@ -43,111 +43,82 @@ export const CartHeader = styled.div`
 
   span {
     margin: 0 auto;
+    color: #2b2f33;
   }
 `;
 
 export const CartList = styled.ul`
-  padding: 0 16px;
+  padding: 0 1.6rem;
+  width: 100%;
 `;
 
 export const CartItem = styled.li`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 150px;
-
-  & + & {
-    margin-top: 5px;
-    border-bottom: 1px solid #eee;
-  }
-
-  input {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    color: #000;
-    padding: 2px;
-    width: 40px;
-    background: #fff;
-  }
-
-  .cart_item__name {
-    font-size: 1.4rem;
-    font-weight: 600;
-  }
-
-  .cart-item__size {
-    color: #666;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-top: 2px;
-  }
-
-  .cart-item__summary {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cart-item__price {
-    font-size: 1.4rem;
-    margin-top: 10px;
-    font-weight: 600;
-  }
-
-  .cart-item__action {
-    margin-top: 5px;
-  }
+  padding: 1rem 0;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
 `;
 
 export const ProductFigure = styled.figure`
-  height: 100%;
+  width: 25%;
+
   img {
-    height: 100%;
+    width: 100%;
   }
 `;
 
-export const SummaryWrapper = styled.div`
+export const ProductWrapper = styled.div`
   display: flex;
-  flex: 1;
-  align-items: flex-start;
+  justify-content: center;
+  width: 75%;
+`;
+
+export const ProductInfo = styled.div`
+  display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: 5px;
+  padding: 0 1rem;
 `;
 
 export const ProductName = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 1rem;
 `;
 
 export const ProductSize = styled.span`
-  color: #666;
-  font-size: 1.1rem;
-  font-weight: 600;
+  color: #a7a7a7;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
 `;
 
 export const ProductPrice = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  width: 50%;
+  text-align: right;
 `;
 
 export const ProductActions = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+
   span {
-    margin: 0 5px;
+    padding: 0 1.6rem;
+  }
+
+  button {
+    border: 1px solid #000;
+    border-radius: 2px;
   }
 `;
 
-export const Total = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  background: #000;
+export const Total = styled.footer`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   color: #fff;
-  height: 40px;
+  background: #212529;
+  text-align: center;
+  padding: 1.6rem;
 `;

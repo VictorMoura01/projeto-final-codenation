@@ -42,4 +42,8 @@ export default createGlobalStyle`
     background-color: transparent;
   }
 
+  ul{
+    list-style: none;
+  }
+
 `;

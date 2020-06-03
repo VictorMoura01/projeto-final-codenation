@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FiArrowLeft, FiPlus, FiMinus, FiTrash } from 'react-icons/fi';
+import PerfectScrollBar from 'react-perfect-scrollbar';
 
 import {
   Container,
@@ -9,7 +10,8 @@ import {
   CartList,
   CartItem,
   ProductFigure,
-  SummaryWrapper,
+  ProductWrapper,
+  ProductInfo,
   ProductName,
   ProductSize,
   ProductPrice,
@@ -49,31 +51,31 @@ export default function Cart({ visible, handleBackClick }) {
             <ProductFigure>
               <img src={product.image} alt="produto" />
             </ProductFigure>
-            <SummaryWrapper>
-              <ProductName>{product.name}</ProductName>
-              <ProductSize>Tam.: {product.size.size}</ProductSize>
+            <ProductWrapper>
+              <ProductInfo>
+                <ProductName>{product.name}</ProductName>
+                <ProductSize>Tam.: {product.size.size}</ProductSize>
+                <ProductActions>
+                  <button type="button">
+                    <FiMinus size={20} />
+                  </button>
+                  <span>{product.amount}</span>
+                  <button type="button">
+                    <FiPlus size={20} />
+                  </button>
+                  {/* <button type="button" onClick={() => handleRemoveItem(index)}>
+                    <FiTrash size={20} />
+                  </button> */}
+                </ProductActions>
+              </ProductInfo>
               <ProductPrice>{product.actual_price}</ProductPrice>
-              <ProductActions>
-                <button type="button">
-                  <FiMinus size={20} />
-                </button>
-                <span>{product.amount}</span>
-                <button type="button">
-                  <FiPlus size={20} />
-                </button>
-                <button type="button" onClick={() => handleRemoveItem(index)}>
-                  <FiTrash size={20} />
-                </button>
-              </ProductActions>
-            </SummaryWrapper>
+            </ProductWrapper>
           </CartItem>
         ))}
       </CartList>
-      <footer>
-        <Total>
-          <strong>Total - R$ {total}</strong>
-        </Total>
-      </footer>
+      <Total>
+        <span>Total - R$ {total}</span>
+      </Total>
     </Container>
   );
 }
