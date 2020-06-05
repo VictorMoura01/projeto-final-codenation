@@ -13,6 +13,8 @@ export const Container = styled.div`
   transform: translate3d(100%, 0, 0);
   width: 100%;
   z-index: 20;
+  overflow-y: scroll;
+  height: 100%;
 
   ${({ visible }) =>
     visible &&
@@ -40,7 +42,6 @@ export const CartHeader = styled.div`
   padding: 15px;
   background: #fff;
   margin-bottom: 5px;
-
   span {
     margin: 0 auto;
     color: #2b2f33;
@@ -126,7 +127,7 @@ export const ActionButton = styled.button`
 `;
 
 export const Total = styled.footer`
-  position: fixed;
+  position: sticky;
   left: 0;
   bottom: 0;
   width: 100%;

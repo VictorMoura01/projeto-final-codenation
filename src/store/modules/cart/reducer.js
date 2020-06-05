@@ -9,7 +9,7 @@ export default function cart(state = INITIAL_STATE, action) {
           (p) => p.size.sku === action.payload.product.size.sku
         );
         if (existingProduct) {
-          existingProduct.amount += 1;
+          existingProduct.amount += action.payload.amount;
         } else {
           draft.push({ ...action.payload.product, amount: 1 });
         }

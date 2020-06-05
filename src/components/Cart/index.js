@@ -20,16 +20,22 @@ import {
   Total,
 } from './styles';
 
-import { removeFromCart } from '../../store/modules/cart/actions';
+import { addToCart, removeFromCart } from '../../store/modules/cart/actions';
 
 export default function Cart({ visible, handleBackClick }) {
   const cart = useSelector((state) => state.cart);
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
 
-  function handleRemoveItem(index) {
+  const handleRemoveItem = (index) => {
     dispatch(removeFromCart(index));
-  }
+  };
+
+  const handleChangeAmount = (amount, index) => {
+    const selectedProduct = cart[index];
+    if (selectedProduct.amount === 1 && amount === -1) return;
+    dispatch(addToCart(selectedProduct, amount));
+  };
 
   useEffect(() => {
     const totalPrice = cart.reduce((accumulator, product) => {
@@ -48,7 +54,7 @@ export default function Cart({ visible, handleBackClick }) {
       </CartHeader>
       <CartList>
         {cart.map((product, index) => (
-          <CartItem key={product.code_color}>
+          <CartItem key={product.size.sku}>
             <ProductFigure>
               <img src={product.image} alt="produto" />
             </ProductFigure>
@@ -62,11 +68,11 @@ export default function Cart({ visible, handleBackClick }) {
               </ProductInfo>
               <ProductActions>
                 <div>
-                  <ActionButton>
+                  <ActionButton onClick={() => handleChangeAmount(-1, index)}>
                     <FiMinus size={20} />
                   </ActionButton>
                   <span>{product.amount}</span>
-                  <ActionButton>
+                  <ActionButton onClick={() => handleChangeAmount(1, index)}>
                     <FiPlus size={20} />
                   </ActionButton>
                 </div>
