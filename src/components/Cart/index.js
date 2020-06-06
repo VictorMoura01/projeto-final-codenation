@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FiArrowLeft, FiPlus, FiMinus, FiTrash } from 'react-icons/fi';
-import PerfectScrollBar from 'react-perfect-scrollbar';
 
 import {
   Container,
@@ -21,6 +20,7 @@ import {
 } from './styles';
 
 import { addToCart, removeFromCart } from '../../store/modules/cart/actions';
+import { formatPrice } from '../../util/format';
 
 export default function Cart({ visible, handleBackClick }) {
   const cart = useSelector((state) => state.cart);
@@ -39,7 +39,7 @@ export default function Cart({ visible, handleBackClick }) {
 
   useEffect(() => {
     const totalPrice = cart.reduce((accumulator, product) => {
-      return accumulator + product.numericPrice;
+      return accumulator + product.numericPrice * product.amount;
     }, 0);
     setTotal(totalPrice);
   }, [cart]);
@@ -85,7 +85,7 @@ export default function Cart({ visible, handleBackClick }) {
         ))}
       </CartList>
       <Total>
-        <span>Total - R$ {total}</span>
+        <span>Total - {formatPrice(total)}</span>
       </Total>
     </Container>
   );
