@@ -8,7 +8,8 @@ import rootReducer from './modules/rootReducer';
 const store =
   process.env.NODE_ENV === 'development'
     ? createStore(persistedReducers(rootReducer), console.tron.createEnhancer())
-    : persistedReducers(rootReducer);
+    : createStore(persistedReducers(rootReducer));
+
 const persistor = persistStore(store);
 
 export { store, persistor };
