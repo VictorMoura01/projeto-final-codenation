@@ -1,38 +1,8 @@
-import styled, { css } from 'styled-components';
-// import PerfectScrollBar from 'react-perfect-scrollbar';
+import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  backface-visibility: hidden;
-  background: #f9f9f9;
-  top: 0;
   min-height: 100vh;
-  position: fixed;
-  transition: transform 0.3s ease-out;
-  transform: translate3d(100%, 0, 0);
   width: 100%;
-  z-index: 20;
-  overflow-y: scroll;
-  height: 100%;
-
-  ${({ visible }) =>
-    visible &&
-    css`
-      transform: translateZ(0);
-      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
-        0 15px 12px rgba(0, 0, 0, 0.22);
-      }
-    `}
-
-  &::before {
-    background-color: red;
-  }
-
-  @media screen and (min-width: 1024px) {
-    width: 375px;
-    right: 0;
-  }
 `;
 
 export const CartHeader = styled.div`
@@ -51,6 +21,7 @@ export const CartHeader = styled.div`
 export const CartList = styled.ul`
   padding: 0 1.6rem;
   width: 100%;
+  height: 100%;
 `;
 
 export const CartItem = styled.li`

@@ -15,7 +15,7 @@ import {
   ProductPrice,
 } from './styles';
 
-export default function Filter({ visible, handleBackClick }) {
+export default function Filter({ handleBackClick }) {
   const productImageReplace =
     'https://via.placeholder.com/470x594/FFF/?text=Imagem+Indispon%C3%ADvel';
   const products = useSelector((state) => state.products);
@@ -34,7 +34,7 @@ export default function Filter({ visible, handleBackClick }) {
   }
 
   return (
-    <Container visible={visible}>
+    <Container>
       <FilterHeader>
         <button type="button" onClick={handleBackClick}>
           <FiArrowLeft size={24} color="#000" />
@@ -50,7 +50,7 @@ export default function Filter({ visible, handleBackClick }) {
       </FilterWrapper>
       <FilterList>
         {filteredProducts.map((product) => (
-          <FilterItem>
+          <FilterItem to={product.productUrl} key={product.code_color}>
             <ProductFigure>
               <img
                 src={product.image || productImageReplace}
@@ -70,6 +70,5 @@ export default function Filter({ visible, handleBackClick }) {
 }
 
 Filter.propTypes = {
-  visible: PropTypes.bool.isRequired,
   handleBackClick: PropTypes.func.isRequired,
 };

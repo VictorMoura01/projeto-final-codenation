@@ -1,36 +1,7 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  backface-visibility: hidden;
-  background: #f9f9f9;
-  top: 0;
-  min-height: 100vh;
-  position: fixed;
-  transition: transform 0.3s ease-out;
-  transform: translate3d(100%, 0, 0);
-  width: 100%;
-  z-index: 20;
-
-  ${({ visible }) =>
-    visible &&
-    css`
-      transform: translateZ(0);
-      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
-        0 15px 12px rgba(0, 0, 0, 0.22);
-      }
-    `}
-
-  &::before {
-    background-color: red;
-  }
-
-  @media screen and (min-width: 1024px) {
-    width: 375px;
-    right: 0;
-  }
-`;
+export const Container = styled.div``;
 
 export const FilterHeader = styled.header`
   background: #fff;
@@ -66,9 +37,11 @@ export const FilterList = styled.ul`
   padding: 10px;
 `;
 
-export const FilterItem = styled.li`
+export const FilterItem = styled(Link)`
   display: flex;
   padding: 5px;
+  text-decoration: none;
+  color: inherit;
 `;
 
 export const ProductFigure = styled.figure`

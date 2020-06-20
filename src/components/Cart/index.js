@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FiArrowLeft, FiPlus, FiMinus, FiTrash } from 'react-icons/fi';
@@ -22,9 +22,9 @@ import {
 import { addToCart, removeFromCart } from '../../store/modules/cart/actions';
 import { formatPrice } from '../../util/format';
 
-export default function Cart({ visible, handleBackClick }) {
-  const cart = useSelector((state) => state.cart);
-  const [total, setTotal] = useState(0);
+export default function Cart({ handleBackClick }) {
+  const cart = useSelector((state) => state.cart.products);
+  const totalItems = useSelector((state) => state.cart.totalItems);
   const dispatch = useDispatch();
 
   const handleRemoveItem = (index) => {
@@ -37,20 +37,21 @@ export default function Cart({ visible, handleBackClick }) {
     dispatch(addToCart(selectedProduct, amount));
   };
 
-  useEffect(() => {
-    const totalPrice = cart.reduce((accumulator, product) => {
-      return accumulator + product.numericPrice * product.amount;
-    }, 0);
-    setTotal(totalPrice);
-  }, [cart]);
+  const totalPrice = useMemo(
+    () =>
+      cart.reduce((accumulator, product) => {
+        return accumulator + product.numericPrice * product.amount;
+      }, 0),
+    [cart]
+  );
 
   return (
-    <Container visible={visible}>
+    <Container>
       <CartHeader>
         <button type="button" onClick={handleBackClick}>
           <FiArrowLeft size={24} color="#000" />
         </button>
-        <span>Sacola ({cart.length})</span>
+        <span>Sacola ({totalItems})</span>
       </CartHeader>
       <CartList>
         {cart.map((product, index) => (
@@ -85,13 +86,12 @@ export default function Cart({ visible, handleBackClick }) {
         ))}
       </CartList>
       <Total>
-        <span>Total - {formatPrice(total)}</span>
+        <span>Total - {formatPrice(totalPrice)}</span>
       </Total>
     </Container>
   );
 }
 
 Cart.propTypes = {
-  visible: PropTypes.bool.isRequired,
   handleBackClick: PropTypes.func.isRequired,
 };

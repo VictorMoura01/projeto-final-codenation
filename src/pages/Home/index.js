@@ -16,13 +16,12 @@ export default function Home() {
       const response = await api.get('catalog');
       const data = response.data.map((product) => ({
         ...product,
-        productUrl: `details/${product.name
-          .replace(/\s+/g, '-')
-          .toLowerCase()}`,
+        productUrl: product.name.replace(/\s+/g, '-').toLowerCase(),
         numericPrice: Number(
           product.actual_price.replace(/R\$\s/, '').replace(/,/, '.')
         ),
       }));
+
       dispatch(store(data));
     }
     if (products.length === 0) getProducts();

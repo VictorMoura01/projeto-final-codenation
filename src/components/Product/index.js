@@ -18,7 +18,7 @@ export default function Product({ product }) {
 
   return (
     <Container>
-      <ProductLink to={product.productUrl}>
+      <ProductLink to={`details/${product.productUrl}`}>
         {product.on_sale && <SalesTag>{product.discount_percentage}</SalesTag>}
         <ProductFigure>
           <img src={product.image || productImageReplace} alt={product.name} />

@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FiSearch, FiShoppingBag } from 'react-icons/fi';
-
-import Cart from '../Cart';
-import Filter from '../Filter';
 
 import { Container, Navbar, NavLogo, Badge } from './styles';
 
+import { toggleCart, toggleFilter } from '../../store/modules/drawer/actions';
+
 export default function Header() {
-  const cartItems = useSelector((state) => state.cart.length);
-  const [cartVisible, setCartVisible] = useState(false);
-  const [filterVisible, setFilterVisible] = useState(false);
+  const totalItems = useSelector((state) => state.cart.totalItems);
+  const dispatch = useDispatch();
+
+  const handleCartClick = () => {
+    dispatch(toggleCart());
+  };
+
+  const handleFilterClick = () => {
+    dispatch(toggleFilter());
+  };
 
   return (
     <Container>
@@ -18,26 +24,15 @@ export default function Header() {
         <NavLogo to="/">FASHIONISTA</NavLogo>
         <div>
           <>
-            <Badge onClick={() => setFilterVisible(!filterVisible)}>
+            <Badge onClick={handleFilterClick}>
               <FiSearch size={20} color="#000" />
             </Badge>
-            <Badge
-              cartItems={cartItems}
-              onClick={() => setCartVisible(!cartVisible)}
-            >
+            <Badge cartItems={totalItems} onClick={handleCartClick}>
               <FiShoppingBag size={20} color="#000" />
             </Badge>
           </>
         </div>
       </Navbar>
-      <Cart
-        visible={cartVisible}
-        handleBackClick={() => setCartVisible(!cartVisible)}
-      />
-      <Filter
-        visible={filterVisible}
-        handleBackClick={() => setFilterVisible(!filterVisible)}
-      />
     </Container>
   );
 }
