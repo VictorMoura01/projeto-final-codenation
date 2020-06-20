@@ -5,10 +5,10 @@ import persistedReducers from './persistReducers';
 
 import rootReducer from './modules/rootReducer';
 
-const store = createStore(
-  persistedReducers(rootReducer),
-  console.tron.createEnhancer()
-);
+const store =
+  process.env.NODE_ENV === 'development'
+    ? createStore(persistedReducers(rootReducer), console.tron.createEnhancer())
+    : persistedReducers(rootReducer);
 const persistor = persistStore(store);
 
 export { store, persistor };
