@@ -25,6 +25,7 @@ export default function Home() {
       dispatch(store(data));
     }
     if (products.length === 0) getProducts();
+    // eslint-disable-next-line
   }, []);
 
   return (
