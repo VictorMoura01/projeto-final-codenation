@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { FiArrowLeft } from 'react-icons/fi';
@@ -16,10 +17,12 @@ import {
 } from './styles';
 
 export default function Filter({ handleBackClick }) {
+  const location = useLocation();
   const productImageReplace =
     'https://via.placeholder.com/470x594/FFF/?text=Imagem+Indispon%C3%ADvel';
   const products = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [baseUrl, setBaseUrl] = useState('details/');
 
   function handleFilterChange(event) {
     const filter = event.target.value.toUpperCase();
@@ -32,6 +35,10 @@ export default function Filter({ handleBackClick }) {
       setFilteredProducts([]);
     }
   }
+
+  useEffect(() => {
+    if (location.pathname !== '/') setBaseUrl('');
+  }, []);
 
   return (
     <Container>
@@ -50,7 +57,10 @@ export default function Filter({ handleBackClick }) {
       </FilterWrapper>
       <FilterList>
         {filteredProducts.map((product) => (
-          <FilterItem to={product.productUrl} key={product.code_color}>
+          <FilterItem
+            to={`${baseUrl}${product.productUrl}`}
+            key={product.code_color}
+          >
             <ProductFigure>
               <img
                 src={product.image || productImageReplace}
