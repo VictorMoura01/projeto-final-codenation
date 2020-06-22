@@ -38,6 +38,7 @@ export default function Filter({ handleBackClick }) {
 
   useEffect(() => {
     if (location.pathname !== '/') setBaseUrl('');
+    // eslint-disable-next-line
   }, []);
 
   return (
