@@ -61,6 +61,7 @@ export default function Filter({ handleBackClick }) {
           <FilterItem
             to={`${baseUrl}${product.productUrl}`}
             key={product.code_color}
+            onClick={handleBackClick}
           >
             <ProductFigure>
               <img
